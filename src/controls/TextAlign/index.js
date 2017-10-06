@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getSelectedBlocksMetadata, setBlockData } from 'draftjs-utils';
+import { EditorState, Modifier } from 'draft-js';
 
 import LayoutComponent from './Component';
 
@@ -60,10 +61,23 @@ export default class TextAlign extends Component {
     });
   };
 
+  addTab: Function = (): void => {
+    const { onChange, editorState } = this.props;
+    const contentState = Modifier.insertText(
+      editorState.getCurrentContent(),
+      editorState.getSelection(),
+      "    ",
+      editorState.getCurrentInlineStyle()
+    );
+    onChange(EditorState.push(editorState, contentState, 'insert-characters'));
+  }
+
   addBlockAlignmentData:Function = (value: string) => {
     const { editorState, onChange } = this.props;
     const { currentTextAlignment } = this.state;
-    if (currentTextAlignment !== value) {
+    if (value === 'indent') {
+      this.addTab();
+    } else if (currentTextAlignment !== value) {
       onChange(setBlockData(editorState, { 'text-align': value }));
     } else {
       onChange(setBlockData(editorState, { 'text-align': undefined }));

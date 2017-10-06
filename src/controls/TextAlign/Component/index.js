@@ -23,7 +23,7 @@ export default class TextAlign extends Component {
 
   renderInFlatList(): Object {
     const {
-      config: { options, left, center, right, justify, className },
+      config: { options, left, center, right, justify, indent, className },
       onChange,
       currentState: { textAlignment },
       translations,
@@ -75,6 +75,18 @@ export default class TextAlign extends Component {
         >
           <img
             src={justify.icon}
+            alt=""
+          />
+        </Option>}
+        {options.indexOf('indent') >= 0 && <Option
+          value="indent"
+          className={classNames(indent.className)}
+          active={textAlignment === 'indent'}
+          onClick={onChange}
+          title={indent.title || translations['components.controls.textalign.indent']}
+        >
+          <img
+            src={indent.icon}
             alt=""
           />
         </Option>}
@@ -151,6 +163,18 @@ export default class TextAlign extends Component {
         >
           <img
             src={justify.icon}
+            alt=""
+          />
+        </DropdownOption>}
+	{options.indexOf('indent') >= 0 && <DropdownOption
+	  value="indent"
+	  className={classNames(indent.className)}
+          active={textAlignment === 'indent'}
+          onClick={onChange}
+          title={indent.title || translations['components.controls.textalign.indent']}
+        >
+          <img
+            src={indent.icon}
             alt=""
           />
         </DropdownOption>}

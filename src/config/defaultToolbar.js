@@ -84,11 +84,12 @@ export default {
     className: undefined,
     component: undefined,
     dropdownClassName: undefined,
-    options: ['left', 'center', 'right', 'justify'],
+    options: ['left', 'center', 'right', 'justify', 'indent'],
     left: { icon: left, className: undefined, title: undefined },
     center: { icon: center, className: undefined, title: undefined },
     right: { icon: right, className: undefined, title: undefined },
     justify: { icon: justify, className: undefined, title: undefined },
+    indent: { icon: indent, className: undefined, title: undefined },
     title: undefined,
   },
   colorPicker: {
