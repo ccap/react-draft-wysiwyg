@@ -79,4 +79,5 @@ module.exports = {
   'components.controls.textalign.right': 'Right',
   'components.controls.textalign.justify': 'Justify',
   'components.controls.textalign.indent': 'Indent',
+  'components.controls.textalign.outdent': 'Outdent',
 };

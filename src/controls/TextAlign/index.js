@@ -61,22 +61,14 @@ export default class TextAlign extends Component {
     });
   };
 
-  addTab: Function = (): void => {
-    const { onChange, editorState } = this.props;
-    const contentState = Modifier.insertText(
-      editorState.getCurrentContent(),
-      editorState.getSelection(),
-      "    ",
-      editorState.getCurrentInlineStyle()
-    );
-    onChange(EditorState.push(editorState, contentState, 'insert-characters'));
-  }
-
   addBlockAlignmentData:Function = (value: string) => {
     const { editorState, onChange } = this.props;
     const { currentTextAlignment } = this.state;
+    const currentIndent = getSelectedBlocksMetadata(editorState).get('indent');
     if (value === 'indent') {
-      this.addTab();
+      onChange(setBlockData(editorState, { 'indent': currentIndent ? Math.min(8, currentIndent + 1) : 1 }));
+    } else if (value === 'outdent') {
+      onChange(setBlockData(editorState, { 'indent': currentIndent ? Math.max(0, currentIndent - 1) : 0 }));
     } else if (currentTextAlignment !== value) {
       onChange(setBlockData(editorState, { 'text-align': value }));
     } else {
